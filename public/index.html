@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Flu Prediction</title>
+		<link href='https://fonts.googleapis.com/css?family=Dosis:700,600,500,400,200|Open+Sans:400,600' rel='stylesheet' type='text/css' />
+		<link type="text/css" rel="stylesheet" href="css/styles.css" />
+
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+		<link rel="dns-prefetch" href="//ajax.googleapis.com" />
+
+		<meta charset="utf-8" />
+	</head>
+
+	<body>
+		<div id="container">
+			<header id="header">
+				<div id="centered">
+					<h1><a href="http://www.flu-prediction.com">Flu Prediction</a></h1>
+					<nav id="menu">
+						<ul>
+							<li id="active"><a href="#">Flu Map</a></li>
+							<li><a href="#">Ask Watson</a></li>
+							<li><a href="#">About</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div id="view" class="cdc">
+					<div>
+						<a href="#" id="cdc">CDC Data</a>
+						<a href="#" id="twitter">Twitter Data</a>
+					</div>
+				</div>
+			</header>
+			<article>
+				<div id="content">
+					<div id="info-contaier">
+						<div><a href="#" id="back-to-map">Back to the map</a></div>
+						<div id="info">
+							<div id="s-img">
+								<img src="images/states/California.png" alt="California" id="state-img" />
+							</div>
+							<header id="state-params">
+								<h2 id="s-name"><span id="st-name">USA</span></h2>
+								<h3 id="s-population"><span id="population">323 354 887</span></h3>
+							</header>
+							<div id="stats-parent">
+								<dl id="stats">
+									<dt>AVERAGE ILI LEVEL</dt>
+									<dd id="average-ili">3,4% (11 230)</dd>
+									<dt>CURENT ILI LEVEL</dt>
+									<dd id="current-ili">1,2% (10 450)</dd>
+									<dt title="Percent from all deaths">DEATHS DUE TO ILI *</dt>
+									<dd title="Percent from all deaths" id="deaths-ili">0.025% (153)</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
+					<div id="state-influence">
+						<h3>Influence from other states</h3>
+						<div id="incoming">
+							<h4>Incoming</h4>
+							<div id="incoming-container">
+								<span style="width: 25px;"></span>
+								<span style="width: 30px;"></span>
+								<span style="width: 60px;"></span>
+								<span style="width: 117px;"></span>
+								<span style="width: 6px;"></span>
+								<span style="width: 4px;"></span>
+							</div>
+						</div>
+						<div id="state-abbr">
+							<div id="separator"></div>
+							<div id="abbr-container">
+								<a href="#" title="Oregon">OR</a>
+								<a href="#" title="Nevada">NV</a>
+								<a href="#" title="Arcanzas">AZ</a>
+								<a href="#" title="Wayoming">WA</a>
+								<a href="#" title="Idaho">ID</a>
+								<a href="#" title="Utah">UT</a>
+							</div>
+						</div>
+						<div id="outgoing">
+							<h4>Outgoing</h4>
+							<div id="outgoing-container">
+								<span style="width: 67px;"></span>
+								<span style="width: 118px;"></span>
+								<span style="width: 27px;"></span>
+								<span style="width: 42px;"></span>
+								<span style="width: 30px;"></span>
+								<span style="width: 12px;"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="diagram-container">
+					<div id="metrics">
+						<h3 id="scale-title">Flu Level</h3>
+						<ul id="data-legend">
+							<li id="cdc-square">CDC Data</li>
+							<li>Prediction</li>
+						</ul>
+						<ul id="level-labels">
+							<li>10</li>
+							<li>9</li><li>8</li><li>7</li>
+							<li>6</li><li>5</li><li>4</li>
+							<li>3</li><li>2</li><li id="lvl1">1</li>
+						</ul>
+						<div id="indicator">
+							<div id="indi-in">
+								<span id="indi-10"></span>
+								<span id="indi-9"></span><span id="indi-8"></span><span id="indi-7"></span>
+								<span id="indi-6"></span><span id="indi-5"></span><span id="indi-4"></span>
+								<span id="indi-3"></span><span id="indi-2"></span><span id="indi-1"></span>
+							</div>
+						</div>
+					</div>
+					<div id="blocks-container">
+						<div id="blocks"></div>
+						<div id="timeline"></div>
+						<div id="flag-container">
+							<div id="point"></div>
+							<div id="date-point">
+								<span id="date-day">23</span>
+								<span id="date-month">Jan 2010</span>
+							</div>
+							<canvas id="line-canvas"></canvas>
+						</div>
+					</div>
+				</div>
+				<div id="zoom-control">
+					<div><a href="#" title="Zoom In" id="zoom-in"><span>Zoom In</span></a></div>
+					<div><a href="#" title="Zoom Out" id="zoom-out"><span>Zoom Out</span></a></div>
+				</div>
+				<div id="map"></div>
+			</article>
+		</div>
+		<script src="js/tween.min.js"></script>
+		<script src="js/ajax.mini.js"></script>
+		<script src="js/statedata.js"></script>
+		<script src="js/scripts.js"></script>
+		<script src="js/leaflet.js"></script>
+		<script>
+			var flags = { active: 'map' }, timeline, pole;
+
+			loadConfig( function () {
+				loadMap();
+				timeline = TimeLine();
+				pole = Pole( updateMap(), 'small' ).create();
+			} );
+		</script>
+	</body>
+</html>
